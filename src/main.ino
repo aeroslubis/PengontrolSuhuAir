@@ -1,3 +1,27 @@
+/* 
+                       +-------------------------------------------+
+                       |  +-------------------------------------+  |
+                       |  |   +------------------------------+  |  |
+                       |  |   |   +-----------------------+  |  |  |
+       +------------+  |  |   |   |   +----------------+  |  |  |  |
+       |            |  |  |   |   |   |   +---------+  |  |  |  |  |
+       |            |  |  |   |   |   |   |         |  |  |  |  |  |
+       |      +-----+--+--+---+---+---+---+--+   +--+--+--+--+--+--+-------+
+     +-+-+    |     D7 D8 D9 D10 D11 D12 D13 |   | D7 D6 D5 D4 EN RS       |
+     |DO |    |                              |   |                         |
+     |   |    |        Aduino Uno            |   |        LCD 16x2         |
+     |DS |    |                              |   |                         |
+     |18b|    |                  D2  D3  D4  |   +-------------------------+
+     |20 |    +-----------------------+--+---+
+     |   |                +-------|   |  |
+     +---+                |    +------+  |
+                          |    |         | +-----------+
+                         +++  +++        | |           |
+                         |G|  |R|        +-+  Relay    |
+                         +-+  +-+          |           |
+                                           +-----------+
+ */
+
 #include <LiquidCrystal.h>     /* Library untuk modul lcd arduino */
 #include <OneWire.h>           /* Library pendukuk sensor DS18b20 */
 #include <DallasTemperature.h> /* Library untuk sensor DS18b20 */
@@ -85,7 +109,7 @@ void loop() {
         /* Hidupkan led merah */
         digitalWrite(led_merah, HIGH);
         /* Tampilkan status air dan pemanas ke lcd */
-        lcd.print("Air:Dng Htr:");
+        lcd.print("Air:Dgn Htr:");
         lcd.print(digitalRead(relay_pin) ? "On" : "Off");
         /* Tampilkan status air dan pemanas ke serial monitor */
         Serial.print("Keadaan air: Dingin, Pemanas: ");
@@ -111,9 +135,9 @@ void loop() {
         /* Matikan pemanas air */
         digitalWrite(relay_pin, LOW);
         /* Hidupkan led hijau */
-        digitalWrite(led_hijau, HIGH);
+        digitalWrite(led_hijau, LOW);
         /* Matikan led merah */
-        digitalWrite(led_merah, LOW);
+        digitalWrite(led_merah, HIGH);
         /* Tampilkan status air dan pemanas ke lcd */
         lcd.print("Air:Pns Htr:");
         lcd.print(digitalRead(relay_pin) ? "On" : "Off");
